@@ -1,0 +1,30 @@
+﻿@model ByteCompany.ViewModel.ProfileViewModel
+@{
+    ViewData["Title"] = "PersonalData";
+}
+
+<h1>PersonalData</h1>
+
+<table>
+    <tbody>
+        @foreach (var item in Model.User)
+        {
+            <tr>
+                <td>
+                    Ваше имя (email):
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td></td>
+                <td>
+                    Ваш возраст:
+                    @{
+                        var nowDate = DateTime.Now;
+                        var userBrithDate = item.Age;
+                        var age = nowDate.Year - userBrithDate;
+                    }
+                    <div>@age</div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,15 @@
+﻿#HeadL {
+    text-align: left;
+    width: 500px;
+    border-collapse: separate;
+    border-spacing: 7px 11px;
+    padding: 5px;
+}
+
+#DateAndCompanyName {
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 7px 11px;
+    width: 125px;
+    padding: 5px;
+}

@@ -1,0 +1,53 @@
+﻿@model ByteCompany.Models.Master
+
+@{
+    ViewData["Title"] = "Details";
+}
+<head>
+    <link href="~/css/Product/CssForDetailsOfProduct.css" rel="stylesheet"/>
+</head>
+
+<div>
+
+
+        <h2 class="text-left">
+            @Html.DisplayFor(model => model.FullName)
+        </h2>
+
+        @if (Model.Avatar != null)
+        {
+            <div class="image__wrapper">
+                <img class="minimized" id="zoomPhoto"
+                     style='width:400px; height:400px;'
+                     src="data:image/jpeg;base64,
+                                             @(Convert.ToBase64String(Model.Avatar))" />
+            </div>
+        }
+        else
+        {
+            <br />
+            <br />
+            <div>На данного сотрудника не нашлось фото</div>
+            <br />
+            <br />
+        }
+
+        <div>
+            @Html.DisplayFor(model => model.Experiance)
+        </div>
+
+        <div>
+            @Html.DisplayFor(model => model.About)
+        </div>
+
+</div>
+<div>
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a>
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/JsForDetailsofProducts.js"></script>

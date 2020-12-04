@@ -1,0 +1,25 @@
+﻿@model IQueryable<ByteCompany.Models.Question>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bопросы</h1>
+
+<table class="table">
+    <tbody>
+        @foreach (Question question in Model)
+        {
+            <tr>
+                <td>@question.User.FullName</td>
+                <td>@question.TextQuestion</td>
+                <td>
+                    <a asp-controller="Answers" asp-action="Create" asp-route-productId="@question.ProductId">
+                        Ответить
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

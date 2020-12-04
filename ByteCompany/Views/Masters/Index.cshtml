@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ByteCompany.Models.Master>
+
+@{
+    ViewData["Title"] = "Наши мастера";
+}
+
+<h2 class="text-center">Наши специалисты</h2>
+<br />
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <button class="btn btn-primary" asp-action="Create">Добавить</button>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Имя</th>
+            <th>Стаж</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Avatar != null)
+                    {
+                        <img class="minimized" id="zoomPhoto"
+                            style='width:80px; height:80px;'
+                            src="data:image/jpeg;base64,
+                                     @(Convert.ToBase64String(item.Avatar))" />
+                    }
+                    else
+                    {
+                        <div>Нет фото</div>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Experiance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.About)
+                </td>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <button class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</button> |
+                        <button class="btn btn-primary" asp-action="Delete" asp-route-id="@item.ID">Delete</button>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

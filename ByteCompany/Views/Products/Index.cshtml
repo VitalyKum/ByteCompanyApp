@@ -1,0 +1,84 @@
+﻿@model ByteCompany.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Товары";
+}
+<head>
+    <link href="~/css/Product/CssForIndex.css" rel="stylesheet" />
+</head>
+<h2 class="text-center">Товары</h2>
+<br />
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<form asp-controller="Products" asp-action="Index">
+    <p>
+        <select class="cs-select cs-skin-rotate"
+                id="IndexSelect"
+                asp-for="ProductSection"
+                asp-items="Model.Sections"
+                method="get">
+            <option value="">All</option>
+        </select>
+
+        Искать по складу: <input type="text" asp-for="SearchString" id="searchInput" />
+        <input type="submit" class="btn btn-outline-success" value="Искать" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Section)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @if (item.Image != null)
+                    {
+                        @Html.Raw("<img style='width:70px; height:70px;' src=\"data:image/jpeg;base64,"
+                        + Convert.ToBase64String(item.Image) + "\" />")
+                    }
+                    else
+                    {
+                        <div>No Photo</div>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Section)
+                </td>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                }
+            </tr>   
+        }
+    </tbody>
+</table>

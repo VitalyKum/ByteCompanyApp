@@ -1,0 +1,17 @@
+﻿@model ByteCompany.Models.Question
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form method="post" asp-action="Create" asp-route-productId="@Model.ProductId">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label class="custom-control-label">Ваш вопрос</label>
+        <input asp-for="TextQuestion" class="form-control" type="text" />
+        <span asp-validation-for="TextQuestion" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Добавить" />
+</form>
+

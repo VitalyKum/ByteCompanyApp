@@ -1,0 +1,63 @@
+﻿@model ByteCompany.ViewModel.ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+    decimal Amount = 0;
+}
+
+<h1>Profile</h1>
+
+<form method="post">
+    <div style="font-size:large; background-color:cadetblue">
+
+
+    </div>
+    Ваша корзина:
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Наименование товара</th>
+                <th>Цена товара</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Bascket.Count > 0)
+            {
+                @foreach (var item in Model.Bascket)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @if (item.BascketPrice == item.Product.Price)
+                            {
+                                @Html.DisplayFor(modelItem => item.BascketPrice)
+                            }
+                            else
+                            {
+                                <div class="text-danger">
+                                    Внимание! Цена изменилась!
+                                    @Html.DisplayFor(modelItem => item.BascketPrice) -> @Html.DisplayFor(modelItem => item.Product.Price)
+                                </div>
+                            }
+
+                        </td>
+                    </tr>
+                    Amount += item.Product.Price;
+                }
+                <tr>
+                    <td>
+                        Всего товаров:
+                        @Model.Bascket.Count
+                    </td>
+                    <td>
+                        На сумму:
+                        @Amount (руб.)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+

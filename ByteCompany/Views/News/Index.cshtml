@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ByteCompany.Models.New>
+
+@{
+    ViewData["Title"] = "Новости";
+}
+
+<h2 class="text-center">Новости</h2>
+<br />
+<head>
+    <link href="~/css/News/CssForIndexofNew.css" rel="stylesheet" type="text/css">
+</head>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<form asp-controller="News" asp-action="Index">
+    <p>
+        Искать новость: <input type="text" name="searchString"/>
+        <input type="submit" value="Искать" />
+    </p>
+</form>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td id="DateAndCompanyName">
+                    <div class="col-sm-12">
+                        @Html.DisplayFor(modelItem => item.DateAddedNews)
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.DisplayFor(modelItem => item.CompanyNew)
+                    </div>
+                </td>
+                <td id="HeadL">
+                    <a asp-action="Details" asp-route-id="@item.ID">
+                        @Html.DisplayFor(modelItem => item.HeadLine)
+                    </a>
+                </td>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="~/js/JsForIndexOfNew.js" type="text/javascript"></script>
+
