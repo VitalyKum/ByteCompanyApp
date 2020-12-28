@@ -73,7 +73,7 @@ namespace ByteCompany.Controllers
             var users = _usersManager.Users.ToList();
 
             if (!String.IsNullOrEmpty(searchString))
-                users = users.Where(u => u.Email.Contains(searchString)).ToList();
+                users = users.Where(u => u.FullName.Contains(searchString)).ToList();
                        
             return View(users);            
         }

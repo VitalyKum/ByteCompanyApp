@@ -14,6 +14,7 @@ using ByteCompany.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using ByteCompany.Hubs;
+using ByteCompany.Data;
 
 namespace ByteCompany
 {
